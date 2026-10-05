@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap | HCA Healthcare transformation roadmap</title>
+<meta name="description" content="A Crawl, Walk, Run roadmap, governance RACI and quarterly dashboard for AI tools for care teams, built from HCA Healthcare's public documents by a student team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ffffff;
+    --wash: #eaf2f0;
+    --ink: #14262b;
+    --muted: #51656a;
+    --scrub: #1b6b60;
+    --scrub-deep: #124a43;
+    --blue: #2f6da3;
+    --blue-deep: #1f4e7a;
+    --rule: #cfdcd9;
+    --measure: 66ch;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: var(--scrub); text-underline-offset: 0.18em; }
+  a:hover { color: var(--scrub-deep); }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Site navigation */
+  .site-nav { border-bottom: 1px solid var(--rule); }
+  .site-nav ul {
+    list-style: none; margin: 0; padding: 0.9rem 0;
+    display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem;
+  }
+  .site-nav a { text-decoration: none; font-weight: 700; }
+  .site-nav a[aria-current="page"] { color: var(--ink); }
+  .site-nav a:hover { text-decoration: underline; }
+
+  /* Opening */
+  .opening { background: var(--wash); padding: 3.5rem 0 3rem; }
+  .opening h1 {
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+    max-width: 20ch;
+  }
+  .opening p { max-width: var(--measure); margin: 0 0 2.25rem; color: var(--ink); }
+
+  /* Reading path: three pages in the order a reader should take them */
+  .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; counter-reset: step; }
+  .path li { position: relative; padding: 1.4rem 1.5rem 0 0; counter-increment: step; }
+  .path li::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0;
+    border-top: 3px solid var(--scrub);
+  }
+  .path li::after {
+    content: counter(step);
+    position: absolute; top: -0.95rem; left: 0;
+    width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    background: var(--scrub); color: #fff; font-weight: 700; font-size: 0.95rem;
+    display: grid; place-items: center;
+  }
+  .path .question { display: block; font-weight: 700; font-size: 1.2rem; line-height: 1.3; margin: 0.6rem 0 0.35rem; }
+  .path .answer { display: block; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+
+  /* Sections */
+  main section { padding: 3rem 0 0.5rem; }
+  main h2 { font-size: 1.6rem; line-height: 1.2; margin: 0 0 1.25rem; padding-left: 0.75rem; border-left: 4px solid var(--blue); }
+  .prose { max-width: var(--measure); }
+  .prose p { margin: 0 0 1rem; }
+
+  /* Team */
+  .team { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
+  .member { display: grid; grid-template-columns: 4rem 1fr; gap: 1.1rem; align-items: start; }
+  .portrait {
+    width: 4rem; height: 4rem; border-radius: 50%;
+    background: var(--blue-deep); color: #fff;
+    display: grid; place-items: center; font-weight: 700; font-size: 1.25rem;
+    object-fit: cover;
+  }
+  .member h3 { margin: 0; font-size: 1.15rem; line-height: 1.3; }
+  .member .role { margin: 0 0 0.5rem; color: var(--blue); font-weight: 700; }
+  .member .bio { margin: 0; }
+  .pending { color: var(--muted); font-style: italic; }
+
+  /* Benefits */
+  .benefits { list-style: none; margin: 0; padding: 0; max-width: 48rem; }
+  .benefits li { display: grid; grid-template-columns: 1fr 9.5rem; gap: 1.5rem; padding: 1.1rem 0; border-top: 1px solid var(--rule); align-items: start; }
+  .benefits li:last-child { border-bottom: 1px solid var(--rule); }
+  .benefits strong { display: block; font-size: 1.1rem; line-height: 1.35; margin-bottom: 0.2rem; }
+  .benefits .where { font-weight: 700; text-align: right; }
+
+  footer { margin-top: 3.5rem; border-top: 1px solid var(--rule); padding: 1.5rem 0 3rem; color: var(--muted); font-size: 0.95rem; }
+  footer p { max-width: var(--measure); margin: 0 0 0.5rem; }
+
+  @media (max-width: 720px) {
+    .opening { padding: 2.5rem 0 2.25rem; }
+    .path { grid-template-columns: 1fr; gap: 1.75rem; }
+    .path li { padding: 1.4rem 0 0; }
+    .team { grid-template-columns: 1fr; }
+    .benefits li { grid-template-columns: 1fr; gap: 0.35rem; }
+    .benefits .where { text-align: left; }
+  }
+</style>
+<style>
+.opening{background:var(--wash)} .roadmap-section{padding:1.1rem 0;border-bottom:1px solid var(--rule)} .roadmap-section p{max-width:82ch;line-height:1.6}.table-scroll{overflow-x:auto;margin:1.4rem 0} table{border-collapse:collapse;width:100%;font-size:.88rem;line-height:1.45}th,td{padding:.5rem;border:1px solid var(--rule);text-align:left;vertical-align:top}th{background:var(--blue);color:white}tbody tr:nth-child(even){background:var(--wash)}.phase-table{min-width:780px} .roadmap-section h3{color:var(--blue-deep);margin-top:1.6rem}a{color:var(--scrub)}@media print{nav{display:none}section{break-inside:auto}tr{break-inside:avoid}body{font-size:9pt}.wrap{width:100%}.opening{padding:.6rem 0}.roadmap-section{padding:.5rem 0}.roadmap-section h2{font-size:13pt}.roadmap-section h3{font-size:10pt;margin:.4rem 0}p{margin:.25rem 0}.table-scroll{margin:.5rem 0}table{font-size:8pt}th,td{padding:.3rem}.roadmap-section:last-child{break-before:page}footer{margin-top:.5rem;padding:.3rem 0}}
+</style></head><body><nav class="site-nav" aria-label="Site pages">
+  <div class="wrap">
+    <ul>
+      <li><a href="index.html">About us</a></li>
+      <li><a href="roadmap.html" aria-current="page">Roadmap</a></li>
+      <li><a href="raci.html">RACI</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+  </div>
+</nav><header class="opening"><div class="wrap"><h1>HCA Healthcare Transformation Roadmap</h1><p>Eduardo Donaire Filho | Roadmap Sequencer | Group 2 | Week 6 | Revision 4</p><p>Prepare the foundations, test three staff-facing tools, then expand only when the evidence supports it.</p></div></header><main><section class="roadmap-section"><div class="wrap"><p>Eduardo Donaire Filho | Group 2 | Week 6 | Revision 4</p><p>Prepare three foundations, pilot three tools, then expand only after measured benefits, adoption and clinical approval. This is our proposed sequence of published HCA initiatives, not HCA’s official timeline or reported results. Evidence window: 2021–2024.</p><h3>Roadmap and dependencies</h3><p>Crawl: Q1–Q3, months 1–9. Walk: Q4–Q6, months 10–18. Run: Q7–Q10, months 19–30. W means pilot; R means rollout. Six distinct initiatives; each pilot continues into its own rollout.</p><div class="table-scroll"><table class="phase-table"><thead><tr><th>Initiative</th><th>Crawl Q1–Q3</th><th>Walk Q4–Q6</th><th>Run Q7–Q10</th></tr></thead><tbody><tr><td>I1 Google Cloud data platform [S2]</td><td>Approved data feeds, access and quality checks.</td><td>Monitor pilot feeds.</td><td>Extend approved feeds by site wave.</td></tr><tr><td>I2 EHR integration and workflow standardization [S1]</td><td>Validate record access, note write-back and local workflows.</td><td>Maintain I5/I6 interfaces.</td><td>Repeat integration checks at each new site.</td></tr><tr><td>I3 Responsible AI Program [S4]</td><td>Owners, human review, change control and incident response.</td><td>Approve and oversee pilots.</td><td>Approve new sites and model versions.</td></tr><tr><td>I4 Timpani nurse scheduling [S1, S4]</td><td>Prepare workforce feeds and scheduling rules.</td><td>I4-W: 2 units in each of 3 hospitals.</td><td>I4-R: eligible nursing units by division waves.</td></tr><tr><td>I5 Augmedix clinical documentation [S1, S3]</td><td>Prepare data and approved-note write-back.</td><td>I5-W: about 75 ER physicians, 4 hospitals.</td><td>I5-R: eligible emergency departments.</td></tr><tr><td>I6 Nurse handoff assistant [S1, S3]</td><td>Prepare patient matching and current-record access.</td><td>I6-W: 2 inpatient units, 1 hospital.</td><td>I6-R: eligible inpatient nursing units.</td></tr></tbody></table></div><p>I1 → I5/I6: approved clinical data. I2 → I5: tested write-back of approved notes; I2 → I6: validated patient matching and current-record access. Without I2, I5/I6 fail our proposed integrated-production gate. I3 → I4/I5/I6: oversight and review. I4 needs workforce feeds and scheduling rules, not Expanse. I1/I2/I3 start in parallel; I2 can test with approved existing environments. Enterprise Expanse conversion is outside the nine-month local readiness scope.</p><h3>Pilot gates and organizational changes</h3><p>Proposed targets: collect a four-week local baseline; evaluate each pilot for 12 weeks. Require at least 80% active adoption per tool. Time savings never override safety or quality findings.</p><div class="table-scroll"><table><thead><tr><th>Pilot to rollout</th><th>Benefit and safety gate</th><th>Organizational change for Run</th></tr></thead><tbody><tr><td>I4-W → I4-R</td><td>≥20% less schedule-preparation time; no worse staffing-rule compliance.</td><td>Common scheduling policy, trained nurse-manager champions and workforce-data owner.</td></tr><tr><td>I5-W → I5-R</td><td>≥20% less documentation time per encounter; maintain audited note quality; physician approves every final note.</td><td>Physician quality owner, training time and continuing chart audits.</td></tr><tr><td>I6-W → I6-R</td><td>≥15% less handoff-preparation time; maintain audited completeness; nurse reviews every handoff.</td><td>Standard handoff checklist, nurse educators and escalation rules.</td></tr></tbody></table></div><p>Each new site must pass data, training and safety checks, with a controlled exception process. A critical safety or privacy incident pauses the affected deployment. Missed adoption or benefit targets require review before more funding.</p></div></section><section class="roadmap-section"><div class="wrap"><h2>Phase explanations and decision handoff</h2><h3>Crawl rationale</h3><p>Crawl prepares selected sites for integrated production. I1 provides approved data access, I2 validates record interfaces and workflows, and I3 establishes oversight. These workstreams can begin in parallel; I2 can use test records before the shared platform is complete. Without I2, I5 lacks tested note write-back and I6 lacks validated access to current patient records, so both fail our proposed production gate. Timpani instead needs workforce feeds and scheduling rules. The nine-month foundation covers local readiness, while the broader Expanse migration continues separately. Walk starts only after the relevant checks pass.</p><h3>Walk rationale</h3><p>Walk tests whether the tools help real staff in a controlled setting. Timpani, clinical documentation and nurse handoff use the foundation differently, so each needs its own baseline, limited deployment and measured result. A favorable demonstration is not enough. The pilots must show less administrative work without weaker clinical quality or staffing compliance, and users must actually adopt the tools. These checks justify later investment and reveal training or workflow changes while the exposure is still small. Only a successful pilot moves into its corresponding Run rollout.</p><h3>Run rationale</h3><p>Run expands proven deployments rather than introducing untested use cases. Each rollout inherits its pilot’s evidence, but a new hospital still needs local data, training and safety checks. Enterprise standards create consistency, while an exception process recognizes that hospitals and units differ. Scaling therefore requires organizational changes: local champions, clear ownership, continuing audits and support for staff. We release investment in waves and pause when quality, adoption or benefit targets are missed. This prevents a large installation count from being mistaken for a successful transformation.</p><h3>Q6 review at month 18 aligned with the RACI</h3><p>The dashboard reviews pilot evidence at the end of Walk. Report measured results when available; otherwise display “Not measured”. Use these RACI decisions exactly:</p><p>Release I4 Timpani nurse scheduling from its pilot (I4-W) into its first rollout wave (I4-R), or hold it? Row D6, signed by the EVP and Chief Clinical Officer.</p><p>Fund the first rollout wave now, or keep the money on readiness work? Row D1, signed by the EVP and Chief Financial Officer.</p><p>A pilot site is below its adoption target: more training, more time, or withdraw the tool? Row D7, signed by the Division President.</p><h3>Sources and evidence limits</h3><p><a href="https://s23.q4cdn.com/949900249/files/doc_downloads/investorDay2023/MASTER-LEGAL-BOOK-110723.pdf">S1 Investor Day 2023, slides 107–112: Expanse, Timpani, Augmedix and handoff.</a></p><p><a href="https://investor.hcahealthcare.com/news/news-details/2021/HCA-Healthcare-Partners-With-Google-Cloud-to-Accelerate-Digital-Transformation/default.aspx">S2 HCA Google Cloud partnership, May 26, 2021: data and analytics.</a></p><p><a href="https://investor.hcahealthcare.com/news/news-details/2023/HCA-Healthcare-Collaborates-With-Google-Cloud-to-Bring-Generative-AI-to-Hospitals/default.aspx">S3 HCA generative AI collaboration, August 29, 2023: historical pilot scopes.</a></p><p><a href="https://s23.q4cdn.com/949900249/files/doc_downloads/2024/hca-healthcare-impact-report-march-2024.pdf">S4 Annual Impact Report 2024, pp. 14–16: Responsible AI and Timpani.</a></p><p>I2 is our scoped integration workstream within published EHR modernization. The sources do not establish an Expanse-only dependency. Published deployment counts do not prove benefits. All quarters, targets, site scopes and decision rights are our proposals. Eduardo: roadmap; Alifiya: RACI and site; Gerald: dashboard. Prepared with AI assistance; the group must verify sources and approve the analysis.</p></div></section></main><footer><div class="wrap"><p>Class project. Proposed sequencing, gates and targets are analytical recommendations, not HCA commitments or reported results.</p><p><a href="raci.html">Next: who signs each decision?</a></p></div></footer></body></html>
